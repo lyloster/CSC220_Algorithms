@@ -43,7 +43,7 @@ XColor tmp_color1, tmp_color2;
 int stepx, stepy, startx, starty;
 void used_edge(int sx, int sy, int tx, int ty);
 void path_edge(int sx, int sy, int tx, int ty);
-void find_path(int *g, int sx, int sy, int tx, int ty);
+//void find_path(int *g, int sx, int sy, int tx, int ty);
 
 int main(int argc, char **argv)
 { int graph[SIZE][SIZE][4]; int i,j,k;
@@ -76,17 +76,17 @@ int main(int argc, char **argv)
   /* now generate start and target point */
   /* and make the edges going out FREE, and connected to the graph*/
   sx = rand()%(SIZE-2) +1;
-  sy = rand()%(SIZE-2) +1; 
-  graph[sx][sy][0] = FREE;   graph[sx+1][sy][2] = FREE; 
-  graph[sx][sy][2] = FREE;   graph[sx-1][sy][0] = FREE;  
-  graph[sx][sy][1] = FREE;   graph[sx][sy+1][3] = FREE;  
-  graph[sx][sy][3] = FREE;   graph[sx][sy-1][1] = FREE;  
+  sy = rand()%(SIZE-2) +1;
+  graph[sx][sy][0] = FREE;   graph[sx+1][sy][2] = FREE;
+  graph[sx][sy][2] = FREE;   graph[sx-1][sy][0] = FREE;
+  graph[sx][sy][1] = FREE;   graph[sx][sy+1][3] = FREE;
+  graph[sx][sy][3] = FREE;   graph[sx][sy-1][1] = FREE;
   tx = rand()%(SIZE-4) +1;
   ty = rand()%(SIZE-4) +1;
-  graph[tx][ty][0] = FREE;   graph[tx+1][ty][2] = FREE; 
-  graph[tx][ty][2] = FREE;   graph[tx-1][ty][0] = FREE;  
-  graph[tx][ty][1] = FREE;   graph[tx][ty+1][3] = FREE;  
-  graph[tx][ty][3] = FREE;   graph[tx][ty-1][1] = FREE;  
+  graph[tx][ty][0] = FREE;   graph[tx+1][ty][2] = FREE;
+  graph[tx][ty][2] = FREE;   graph[tx-1][ty][0] = FREE;
+  graph[tx][ty][1] = FREE;   graph[tx][ty+1][3] = FREE;
+  graph[tx][ty][3] = FREE;   graph[tx][ty-1][1] = FREE;
 
 
 
@@ -100,14 +100,14 @@ int main(int argc, char **argv)
   display_width  = DisplayWidth( display_ptr, screen_num );
   display_height = DisplayHeight( display_ptr, screen_num );
 
-  printf("Width %d, Height %d, Screen Number %d\n", 
+  printf("Width %d, Height %d, Screen Number %d\n",
            display_width, display_height, screen_num);
   /* creating the window */
   border_width = 10;
   win_x = 0; win_y = 0;
   win_height = (int) (display_height/1.3);
   win_width = win_height; /*square window*/
-  
+
   win= XCreateSimpleWindow( display_ptr, RootWindow( display_ptr, screen_num),
                             win_x, win_y, win_width, win_height, border_width,
                             BlackPixel(display_ptr, screen_num),
@@ -125,7 +125,7 @@ int main(int argc, char **argv)
 
   XStringListToTextProperty( &win_name_string,1,&win_name);
   XStringListToTextProperty( &icon_name_string,1,&icon_name);
-  
+
   wm_hints -> flags = StateHint | InputHint ;
   wm_hints -> initial_state = NormalState;
   wm_hints -> input = False;
@@ -137,9 +137,9 @@ int main(int argc, char **argv)
                     size_hints, wm_hints, class_hints );
 
   /* what events do we want to receive */
-  XSelectInput( display_ptr, win, 
+  XSelectInput( display_ptr, win,
             ExposureMask | StructureNotifyMask | ButtonPressMask );
-  
+
   /* finally: put window on screen */
   XMapWindow( display_ptr, win );
 
@@ -153,41 +153,41 @@ int main(int argc, char **argv)
   /* yellow*/
   gc_yellow = XCreateGC( display_ptr, win, valuemask, &gc_yellow_values);
   XSetLineAttributes(display_ptr, gc_yellow, 2, LineSolid,CapRound, JoinRound);
-  if( XAllocNamedColor( display_ptr, color_map, "yellow", 
+  if( XAllocNamedColor( display_ptr, color_map, "yellow",
 			&tmp_color1, &tmp_color2 ) == 0 )
-    {printf("failed to get color yellow\n"); exit(-1);} 
+    {printf("failed to get color yellow\n"); exit(-1);}
   else
     XSetForeground( display_ptr, gc_yellow, tmp_color1.pixel );
   /* green */
   gc_green = XCreateGC( display_ptr, win, valuemask, &gc_green_values);
   XSetLineAttributes(display_ptr, gc_yellow, 2, LineSolid,CapRound, JoinRound);
-  if( XAllocNamedColor( display_ptr, color_map, "green", 
+  if( XAllocNamedColor( display_ptr, color_map, "green",
 			&tmp_color1, &tmp_color2 ) == 0 )
-    {printf("failed to get color green\n"); exit(-1);} 
+    {printf("failed to get color green\n"); exit(-1);}
   else
     XSetForeground( display_ptr, gc_green, tmp_color1.pixel );
   /* red*/
   gc_red = XCreateGC( display_ptr, win, valuemask, &gc_red_values);
   XSetLineAttributes( display_ptr, gc_red, 2, LineSolid, CapRound, JoinRound);
-  if( XAllocNamedColor( display_ptr, color_map, "red", 
+  if( XAllocNamedColor( display_ptr, color_map, "red",
 			&tmp_color1, &tmp_color2 ) == 0 )
-    {printf("failed to get color red\n"); exit(-1);} 
+    {printf("failed to get color red\n"); exit(-1);}
   else
     XSetForeground( display_ptr, gc_red, tmp_color1.pixel );
   /* orange*/
   gc_orange = XCreateGC( display_ptr, win, valuemask, &gc_orange_values);
   XSetLineAttributes( display_ptr, gc_orange, 2, LineSolid, CapRound, JoinRound);
-  if( XAllocNamedColor( display_ptr, color_map, "orange", 
+  if( XAllocNamedColor( display_ptr, color_map, "orange",
 			&tmp_color1, &tmp_color2 ) == 0 )
-    {printf("failed to get color orange\n"); exit(-1);} 
+    {printf("failed to get color orange\n"); exit(-1);}
   else
     XSetForeground( display_ptr, gc_orange, tmp_color1.pixel );
   /* grey */
   gc_grey = XCreateGC( display_ptr, win, valuemask, &gc_grey_values);
   XSetLineAttributes( display_ptr, gc_grey, 3, LineSolid, CapRound, JoinRound);
-  if( XAllocNamedColor( display_ptr, color_map, "dark grey", 
+  if( XAllocNamedColor( display_ptr, color_map, "dark grey",
 			&tmp_color1, &tmp_color2 ) == 0 )
-    {printf("failed to get color grey\n"); exit(-1);} 
+    {printf("failed to get color grey\n"); exit(-1);}
   else
     XSetForeground( display_ptr, gc_grey, tmp_color1.pixel );
 
@@ -195,12 +195,12 @@ int main(int argc, char **argv)
   while(1)
     { XNextEvent( display_ptr, &report );
       switch( report.type )
-      { 
+      {
         case ConfigureNotify:
           /* This event happens when the user changes the size of the window*/
           win_width = report.xconfigure.width;
           win_height = report.xconfigure.height;
-          /* break; this case continues into the next:after a resize, 
+          /* break; this case continues into the next:after a resize,
              the figure gets redrawn */
 	case Expose:
           /* (re-)draw the figure. This event happens
@@ -245,30 +245,30 @@ int main(int argc, char **argv)
 		XFillArc( display_ptr, win, gc, /*black*/
 		       startx+ i*stepx, starty+ j*stepy, /*upper left corner */
 		       (int) (0.66*stepx), (int) (0.66*stepy), 0, 360*64);
-                
+
 
 	  /* Draw Start and Target point yellow: before call of function*/
 	  XFillArc( display_ptr, win, gc_red, /*red*/
-	       startx+ sx*stepx, starty+ sy*stepy, 
+	       startx+ sx*stepx, starty+ sy*stepy,
 	       (int) (0.66*stepx), (int) (0.66*stepy), 0, 360*64);
 	  XFillArc( display_ptr, win, gc_red, /*red*/
-	       startx+ tx*stepx, starty+ ty*stepy, 
+	       startx+ tx*stepx, starty+ ty*stepy,
 	       (int) (0.66*stepx), (int) (0.66*stepy), 0, 360*64);
 
           /* Now call function to draw shortest path */
 	  find_path(&(graph[0][0][0]), sx,sy,tx,ty);
 	  /* Draw Start and Target point red, after function did its work*/
 	  XFillArc( display_ptr, win, gc_red, /*red*/
-	       startx+ sx*stepx, starty+ sy*stepy, 
+	       startx+ sx*stepx, starty+ sy*stepy,
 	       (int) (0.66*stepx), (int) (0.66*stepy), 0, 360*64);
 	  XFillArc( display_ptr, win, gc_red, /*red*/
-	       startx+ tx*stepx, starty+ ty*stepy, 
+	       startx+ tx*stepx, starty+ ty*stepy,
 	       (int) (0.66*stepx), (int) (0.66*stepy), 0, 360*64);
 
           break;
          default:
 	  /* this is a catch-all for other events; it does not do anything.
-             One could look at the report type to see what the event was */ 
+             One could look at the report type to see what the event was */
           break;
 	}
 
@@ -296,10 +296,10 @@ void path_edge(int sx, int sy, int tx, int ty)
               startx + tx*stepx + (int) (0.33*stepx),
 	      starty + ty*stepy + (int) (0.33*stepy) );
 }
-    
 
 
-void find_path(int *g, int sx, int sy, int tx, int ty)
-{   used_edge ( 0,0,1,0 );
-    path_edge(10,10,10,11);
-}  
+// 
+// void find_path(int *g, int sx, int sy, int tx, int ty)
+// {   used_edge ( 0,0,1,0 );
+//     path_edge(10,10,10,11);
+// }
