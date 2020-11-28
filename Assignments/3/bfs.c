@@ -42,32 +42,32 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
   if (sx + 1 < SIZE && graph[sx * SIZE * SIZE + sy * SIZE + 0] == FREE) {
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy
                   .target.x_coord = sx + 1, .target.y_coord = sy};
-    q->add(temp);
+    add(q, temp);
     used_edge(sx, sy, sx + 1, sy);
   }
   if (sy + 1 < SIZE && graph[sx * SIZE * SIZE + sy * SIZE + 1] == FREE) {
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx, .target.y_coord = sy + 1};
-    q->add(temp);
+    add(q, temp);
     used_edge(sx, sy, sx, sy + 1);
   }
   if (sx - 1 > 0 && graph[sx * SIZE * SIZE + sy * SIZE + 2] == FREE) {
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                  .target.x_coord = sx - 1, .target.y_coord = sy};
-    q->add(temp);
+    add(q, temp);
     used_edge(sx, sy, sx - 1, sy);
   }
   if (sy - 1 > 0 && graph[sx * SIZE * SIZE + sy * SIZE + 3] == FREE) {
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx, .target.y_coord = sy - 1};
-    q->add(temp);
+    add(q, temp);
     used_edge(sx, sy, sx, sy - 1);
   }
 
   Edge path [SIZE * SIZE];
   int capacity = 0;
   while (!isEmpty(q)) {
-    Edge temp = q->pop();
+    Edge temp = pop(q);;
     path[capacity] = temp;
     ++capacity;
 
@@ -81,33 +81,33 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
                             .start.y_coord = temp.target.y_coord,
                             .target.x_coord = temp.target.x_coord + 1,
                             .target.y_coord = temp.target.y_coord};
-      q->add(temp_neighbor);
+      add(q, temp_neighbor);
       used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord, temp.target.y_coord + 1);
     }
 
-    if (temp.target.y_coord + 1 < SIZE && graph[[temp.target.x_coord * SIZE * SIZE + temp.target.y_coord * SIZE + 1] == FREE) {
+    if (temp.target.y_coord + 1 < SIZE && graph[temp.target.x_coord * SIZE * SIZE + temp.target.y_coord * SIZE + 1] == FREE) {
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                             .start.y_coord = temp.target.y_coord,
                             .target.x_coord = temp.target.x_coord,
                             .target.y_coord = temp.target.y_coord + 1};
-      q->add(temp_neighbor);
+      add(q, temp_neighbor);
       used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord, temp.target.y_coord + 1);
     }
 
-    if (temp.target.x_coord - 1 > 0 && graph[[temp.target.x_coord * SIZE * SIZE + temp.target.y_coord * SIZE + 2] == FREE) {
+    if (temp.target.x_coord - 1 > 0 && graph[temp.target.x_coord * SIZE * SIZE + temp.target.y_coord * SIZE + 2] == FREE) {
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                   .start.y_coord = temp.target.y_coord,
                   .target.x_coord = temp.target.x_coord - 1,
                   .target.y_coord = temp.target.y_coord};
-      q->add(temp_neighbor);
+      add(q, temp_neighbor);
       used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord - 1, temp.target.y_coord);
     }
-    if (temp.target.y_coord - 1 > 0 && graph[[temp.target.x_coord * SIZE * SIZE + temp.target.y_coord * SIZE + 3] == FREE) {
+    if (temp.target.y_coord - 1 > 0 && graph[temp.target.x_coord * SIZE * SIZE + temp.target.y_coord * SIZE + 3] == FREE) {
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                             .start.y_coord = temp.target.y_coord,
                             .target.x_coord = temp.target.x_coord,
                             .target.y_coord = temp.target.y_coord - 1};
-      q->add(temp_neighbor);
+      add(q, temp_neighbor);
       used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord, temp.target.y_coord - 1);
     }
   }
