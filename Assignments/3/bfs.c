@@ -5,7 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-// #include "test.c"
+#include "test.c"
 
 typedef struct Vertex {
   int x_coord;
@@ -18,7 +18,7 @@ typedef struct Edge {
 } Edge;
 
 typedef struct Node {
-  Edge edge; //Vertex v;
+  Edge edge;
   struct Node* next;
 } Node;
 
@@ -28,16 +28,90 @@ typedef struct Queue {
 } Queue;
 
 void printQueue(Queue* list);
-//void add(Queue* list, int val);
 void add(Queue* list, Edge e);
-//int pop(Queue* list);
 Edge* pop(Queue* list);
-//int inspect(Queue* list);
 int isEmpty(Queue* list);
 void find_path(int* graph, int sx, int sy, int tx, int ty);
+void done(int* graph, Edge* path, int capacity, int sx, int sy, int tx, int ty);
 
 void find_path(int* graph, int sx, int sy, int tx, int ty) {
+  Queue* q;
+  q = (Queue*) malloc(sizeof(Queue));
+  //adding all the FREE outgoing edges from vertex S
+  if (sx + 1 < SIZE && graph[sx][sy][0] == FREE) {
+    Edge temp = {.start.x_coord = sx, .start.y_coord = sy
+                  .end.x_coord = sx + 1, .end.y_coord = sy};
+    q.add(temp);
+    used_edge(sx, sy, sx + 1, sy);
+  }
+  if (sy + 1 < SIZE && graph[sx][sy][1] == FREE) {
+    Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
+                  .end.x_coord = sx, .end.y_coord = sy + 1};
+    q.add(temp);
+    used_edge(sx, sy, sx, sy + 1);
+  }
+  if (sx - 1 > 0 && graph[sx][sy][2] == FREE) {
+    Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
+                 .end.x_coord = sx - 1, .end.y_coord = sy};
+    q.add(temp);
+    used_edge(sx, sy, sx - 1, sy);
+  }
+  if (sy - 1 > 0 && graph[sx][sy][3] == FREE) {
+    Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
+                  .end.x_coord = sx, .end.y_coord = sy - 1};
+    q.add(temp);
+    used_edge(sx, sy, sx, sy - 1);
+  }
 
+  Edge path [SIZE * SIZE];
+  int capacity = 0;
+  while (!isEmpty(q)) {
+    Edge temp = q.pop();
+    path[capacity] = temp;
+    ++capacity;
+
+    if (temp.end.x_coord == tx && temp.end.y_coord == ty) {
+      done(graph, path, capacity, sx, sy, tx, ty);
+      break; //return?
+    }
+
+    if (temp.end.x_coord + 1 < SIZE && graph[temp.end.x_coord][temp.end.y_coord][0] == FREE) {
+      Edge temp_neighbor = {.start.x_coord = temp.end.x_coord,
+                            .start.y_coord = temp.end.y_coord,
+                            .end.x_coord = temp.end.x_coord + 1,
+                            .end.y_coord = temp.end.y_coord};
+      q.add(temp_neighbor);
+      used_edge(temp.end.x_coord, temp.end.y_coord, temp.end.x_coord, temp.end.y_coord + 1);
+    }
+
+    if (temp.end.y_coord + 1 < SIZE && graph[temp.end.x_coord][temp.end.y_coord][1] == FREE) {
+      Edge temp_neighbor = {.start.x_coord = temp.end.x_coord,
+                            .start.y_coord = temp.end.y_coord,
+                            .end.x_coord = temp.end.x_coord,
+                            .end.y_coord = temp.end.y_coord + 1};
+      q.add(temp_neighbor);
+      used_edge(temp.end.x_coord, temp.end.y_coord, temp.end.x_coord, temp.end.y_coord + 1);
+    }
+
+    if (temp.end.x_coord - 1 > 0 && graph[temp.end.x_coord][temp.end.y_coord][2] == FREE) {
+      Edge temp_neighbor = {.start.x_coord = temp.end.x_coord,
+                  .start.y_coord = temp.end.y_coord,
+                  .end.x_coord = temp.end.x_coord - 1,
+                  .end.y_coord = temp.end.y_coord};
+      q.add(temp_neighbor);
+      used_edge(temp.end.x_coord, temp.end.y_coord, temp.end.x_coord - 1, temp.end.y_coord);
+    }
+    if (temp.end.y_coord - 1 > 0 && graph[temp.end.x_coord][temp.end.y_coord][3] == FREE) {
+      Edge temp_neighbor = {.start.x_coord = temp.end.x_coord,
+                            .start.y_coord = temp.end.y_coord,
+                            .end.x_coord = temp.end.x_coord,
+                            .end.y_coord = temp.end.y_coord - 1};
+      q.add(temp_neighbor);
+      used_edge(temp.end.x_coord, temp.end.y_coord, temp.end.x_coord, temp.end.y_coord - 1);
+    }
+
+
+  }
 }
 
 int isEmpty(Queue* list) {
@@ -47,21 +121,6 @@ int isEmpty(Queue* list) {
     return 0;
   }
 }
-
-// void add(Queue* list, int val) { //insert a node in a queue
-//     if (list->head == NULL) {
-//       list->head = (Node*)malloc(sizeof(Node));
-//       list->head->value = val;
-//       list->head->next = NULL;
-//       list->tail = list->head;
-//     } else {
-//       Node* temp = (Node*)malloc(sizeof(Node));
-//       temp->value = val;
-//       temp->next = NULL;
-//       list->tail->next = temp;
-//       list->tail = temp;
-//     }
-// }
 
 void add(Queue* list, Edge e) { //insert a node in a queue
     if (list->head == NULL) {
@@ -91,22 +150,6 @@ void printQueue(Queue* list) {
     }
   }
 }
-
-// int pop(Queue* list) {
-//   if (list == NULL) {
-//     printf("NULL POINTER");
-//     return -1;
-//   } else if (list->head == NULL) {
-//     printf("EMPTY QUEUE");
-//     return -1;
-//   }else {
-//     int first = list->head->value;
-//     Node* temp = list->head;
-//     list->head = list->head->next;
-//     free(temp);
-//     return first;
-//   }
-// }
 
 Edge* pop(Queue* list) {
   if (list == NULL) {
