@@ -36,10 +36,10 @@ void done(int* graph, Edge* path, int capacity, int sx, int sy, int tx, int ty);
 
 //should be moved in test?
 void find_path(int* graph, int sx, int sy, int tx, int ty) {
-  printf("(1,1) to (1,2): %d\n", graph[1 * SIZE * SIZE + 1 * SIZE + 1]);
-  printf("(2,2) to (2,3): %d\n", graph[2 * SIZE * SIZE + 2 * SIZE + 1]);
-  printf("(2,3) to (2,4): %d\n", graph[2 * SIZE * SIZE + 3 * SIZE + 1]);
-  printf("(2,4) to (2,5): %d\n", graph[2 * SIZE * SIZE + 4 * SIZE + 1]);
+  printf("(1,1) to (1,2): %d\n", graph[1 * SIZE * SIZE + 1 * SIZE + 0]);
+  printf("(2,2) to (2,3): %d\n", graph[2 * SIZE * SIZE + 2 * SIZE + 0]);
+  printf("(2,3) to (2,4): %d\n", graph[2 * SIZE * SIZE + 3 * SIZE + 0]);
+  printf("(2,4) to (2,5): %d\n", graph[2 * SIZE * SIZE + 4 * SIZE + 0]);
   printf("");
   // Queue* q;
   // q = (Queue*) malloc(sizeof(Queue));
