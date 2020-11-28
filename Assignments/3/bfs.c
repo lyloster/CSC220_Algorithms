@@ -151,13 +151,13 @@ void printQueue(Queue* list) {
 }
 
 Edge pop(Queue* list) {
-  if (list == NULL) {
-    printf("NULL POINTER");
-    return -1;
-  } else if (list->head == NULL) {
-    printf("EMPTY QUEUE");
-    return -1;
-  }else {
+  // if (list == NULL) {
+  //   printf("NULL POINTER");
+  //   return -1;
+  // } else if (list->head == NULL) {
+  //   printf("EMPTY QUEUE");
+  //   return -1;
+  // }else {
     //Edge* e = (Edge*)(malloc(sizeof(Edge))); //where to dealocate
     Edge e = list->head->edge;
     // e->start.x_coord = list->head->edge.start.x_coord;
@@ -168,7 +168,7 @@ Edge pop(Queue* list) {
     list->head = list->head->next;
     free(temp);
     return e;
-  }
+  //}
 }
 
 // int inspect(Queue* list) {
@@ -182,7 +182,7 @@ Edge pop(Queue* list) {
 //     return list->head->value;
 //   }
 // }
-// 
+//
 // int main() {
 //   Queue* start;
 //   start = (Queue*) malloc(sizeof(Queue));
