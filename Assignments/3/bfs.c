@@ -180,17 +180,17 @@ Edge pop(Queue* list) {
   //}
 }
 
-int inspect(Queue* list) {
-  if (list == NULL) {
-    printf("NULL POINTER");
-    return - 1;
-  } else if (list->head == NULL) {
-    printf("EMPTY QUEUE");
-    return -1;
-  } else {
-    return list->head->value;
-  }
-}
+// int inspect(Queue* list) {
+//   if (list == NULL) {
+//     printf("NULL POINTER");
+//     return - 1;
+//   } else if (list->head == NULL) {
+//     printf("EMPTY QUEUE");
+//     return -1;
+//   } else {
+//     return list->head->value;
+//   }
+// }
 
 // int main() {
 //   Queue* start;
