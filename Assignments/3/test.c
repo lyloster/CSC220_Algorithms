@@ -43,7 +43,7 @@ XColor tmp_color1, tmp_color2;
 int stepx, stepy, startx, starty;
 void used_edge(int sx, int sy, int tx, int ty);
 void path_edge(int sx, int sy, int tx, int ty);
-//void find_path(int *g, int sx, int sy, int tx, int ty);
+void find_path(int *g, int sx, int sy, int tx, int ty);
 
 int main(int argc, char **argv)
 { int graph[SIZE][SIZE][4]; int i,j,k;
@@ -298,7 +298,7 @@ void path_edge(int sx, int sy, int tx, int ty)
 }
 
 
-// 
+//
 // void find_path(int *g, int sx, int sy, int tx, int ty)
 // {   used_edge ( 0,0,1,0 );
 //     path_edge(10,10,10,11);
