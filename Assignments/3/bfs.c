@@ -113,6 +113,10 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
   }
 }
 
+void done(int* graph, Edge* path, int capacity, int sx, int sy, int tx, int ty) {
+
+}
+
 int isEmpty(Queue* list) {
   if (list->head == NULL) {
     return 1;
