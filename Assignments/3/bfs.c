@@ -29,7 +29,7 @@ typedef struct Queue {
 
 void printQueue(Queue* list);
 void add(Queue* list, Edge e);
-Edge* pop(Queue* list);
+Edge pop(Queue* list);
 int isEmpty(Queue* list);
 void find_path(int* graph, int sx, int sy, int tx, int ty);
 void done(int* graph, Edge* path, int capacity, int sx, int sy, int tx, int ty);
@@ -40,7 +40,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
   q = (Queue*) malloc(sizeof(Queue));
   //adding all the FREE outgoing edges from vertex S
   if (sx + 1 < SIZE && graph[sx * SIZE * SIZE + sy * SIZE + 0] == FREE) {
-    Edge temp = {.start.x_coord = sx, .start.y_coord = sy
+    Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx + 1, .target.y_coord = sy};
     add(q, temp);
     used_edge(sx, sy, sx + 1, sy);
@@ -150,7 +150,7 @@ void printQueue(Queue* list) {
   }
 }
 
-Edge* pop(Queue* list) {
+Edge pop(Queue* list) {
   if (list == NULL) {
     printf("NULL POINTER");
     return -1;
@@ -158,11 +158,12 @@ Edge* pop(Queue* list) {
     printf("EMPTY QUEUE");
     return -1;
   }else {
-    Edge* e = (Edge*)(malloc(sizeof(Edge))); //where to dealocate
-    e->start.x_coord = list->head->edge.start.x_coord;
-    e->start.y_coord = list->head->edge.start.y_coord;
-    e->target.x_coord = list->head->edge.target.x_coord;
-    e->target.y_coord = list->head->edge.target.y_coord;
+    //Edge* e = (Edge*)(malloc(sizeof(Edge))); //where to dealocate
+    Edge e = list->head->edge;
+    // e->start.x_coord = list->head->edge.start.x_coord;
+    // e->start.y_coord = list->head->edge.start.y_coord;
+    // e->target.x_coord = list->head->edge.target.x_coord;
+    // e->target.y_coord = list->head->edge.target.y_coord;
     Node* temp = list->head;
     list->head = list->head->next;
     free(temp);
@@ -182,40 +183,41 @@ Edge* pop(Queue* list) {
 //   }
 // }
 
-// int main() {
-//   Queue* start;
-//   start = (Queue*) malloc(sizeof(Queue));
-//   start->head = NULL;
-//   start->tail = NULL;;
-//   int empty = isEmpty(start);
-//   printf("empty == %d\n", empty);
-//   for (int i = 0; i < 10; ++i) {
-//     Edge e;
-//     e.start.x_coord = i;
-//     e.start.y_coord = i;
-//     e.target.x_coord = i + 1;
-//     e.target.y_coord = i + 1;
-//     add(start, e);
-//   }
-//   printf("Added edges\n");
-//   printQueue(start);
-//   printf("\n--------------------\n");
-//   // Edge* i = pop(start);
-//   // printf("Popped one edge\n");
-//   // printQueue(start);
-//   // printf("\n---------------------\n");
-//   // i = pop(start);
-//   // printf("Popped one edge\n");
-//   // printQueue(start);
-//   // printf("\n---------------------\n");
-//   for (int i = 0; i < 10; ++i) {
-//     Edge* i = pop(start);
-//   }
-//   // i = inspect(start);
-//   // printf("i == %d\n", i);
-//   // printQueue(start);
-//   // printf("\n---------------------\n");
-//   empty = isEmpty(start);
-//   printf("empty == %d\n", empty);
-//   return 0;
-// }
+int main() {
+  Queue* start;
+  start = (Queue*) malloc(sizeof(Queue));
+  start->head = NULL;
+  start->tail = NULL;;
+  int empty = isEmpty(start);
+  printf("empty == %d\n", empty);
+  for (int i = 0; i < 10; ++i) {
+    Edge e;
+    e.start.x_coord = i;
+    e.start.y_coord = i;
+    e.target.x_coord = i + 1;
+    e.target.y_coord = i + 1;
+    add(start, e);
+  }
+  printf("Added edges\n");
+  printQueue(start);
+  printf("\n--------------------\n");
+   Edge i = pop(start);
+  // printf("Popped one edge\n");
+  // printQueue(start);
+  // printf("\n---------------------\n");
+  //i = pop(start);
+  printf("Popped one edge\n");
+  printQueue(start);
+  printf("\n---------------------\n");
+  printf("The popped edge: (%d, %d), (%d,%d)\n", i.start.x_coord, i.start.y_coord, i.target.x_coord, i.target.y_coord);
+  // for (int i = 0; i < 10; ++i) {
+  //   Edge* i = pop(start);
+  // }
+  // i = inspect(start);
+  // printf("i == %d\n", i);
+  // printQueue(start);
+  // printf("\n---------------------\n");
+  empty = isEmpty(start);
+  printf("empty == %d\n", empty);
+  return 0;
+}
