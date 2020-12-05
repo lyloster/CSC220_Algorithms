@@ -118,7 +118,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       //printf("26\n");
       done(graph, path, capacity, sx, sy, tx, ty);
       //printf("27\n");
-      break; //return?
+      return; //return?
       //printf("28\n");
     }
 
