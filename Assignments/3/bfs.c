@@ -51,78 +51,121 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     }
   }
   Queue* q;
+  printf("1\n");
   q = (Queue*) malloc(sizeof(Queue));
+  printf("2\n");
   //adding all the FREE outgoing edges from vertex S
   if (sx + 1 < SIZE && graph[sx * SIZE + sy * SIZE + 0] == FREE) {
+    printf("3\n");
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx + 1, .target.y_coord = sy};
+    printf("4\n");
     add(q, temp);
+    printf("5\n");
     used_edge(sx, sy, sx + 1, sy);
+    printf("6\n");
   }
   if (sy + 1 < SIZE && graph[sx * SIZE + sy * SIZE + 1] == FREE) {
+    printf("7\n");
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx, .target.y_coord = sy + 1};
+    printf("8\n");
     add(q, temp);
+    printf("9\n");
     used_edge(sx, sy, sx, sy + 1);
+    printf("10\n");
   }
   if (sx - 1 > 0 && graph[sx * SIZE  + sy * SIZE + 2] == FREE) {
+    printf("11\n");
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                  .target.x_coord = sx - 1, .target.y_coord = sy};
+    printf("12\n");
     add(q, temp);
+    printf("13\n");
     used_edge(sx, sy, sx - 1, sy);
+    printf("14\n");
   }
   if (sy - 1 > 0 && graph[sx * SIZE + sy * SIZE + 3] == FREE) {
+    printf("15\n");
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx, .target.y_coord = sy - 1};
+    printf("16\n");
     add(q, temp);
+    printf("17\n");
     used_edge(sx, sy, sx, sy - 1);
+    printf("18\n");
   }
-
-  Edge path [SIZE * SIZE];
+  printf("19\n");
+  Edge path [SIZE * SIZE * 4];
+  printf("20\n");
   int capacity = 0;
+  printf("21\n");
   while (!isEmpty(q)) {
-    Edge temp = pop(q);;
+    printf("22\n");
+    Edge temp = pop(q);
+    printf("23\n");
     path[capacity] = temp;
+    printf("24\n");
     ++capacity;
+    printf("25\n");
 
     if (temp.target.x_coord == tx && temp.target.y_coord == ty) {
+      printf("26\n");
       done(graph, path, capacity, sx, sy, tx, ty);
+      printf("27\n");
       break; //return?
+      printf("28\n");
     }
 
     if (temp.target.x_coord + 1 < SIZE && graph[temp.target.x_coord * SIZE + temp.target.y_coord * SIZE + 0] == FREE) {
+      printf("29\n");
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                             .start.y_coord = temp.target.y_coord,
                             .target.x_coord = temp.target.x_coord + 1,
                             .target.y_coord = temp.target.y_coord};
+      printf("30\n");
       add(q, temp_neighbor);
+      printf("31\n");
       used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord, temp.target.y_coord + 1);
+      printf("32\n");
     }
 
     if (temp.target.y_coord + 1 < SIZE && graph[temp.target.x_coord * SIZE + temp.target.y_coord * SIZE + 1] == FREE) {
+      printf("33\n");
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                             .start.y_coord = temp.target.y_coord,
                             .target.x_coord = temp.target.x_coord,
                             .target.y_coord = temp.target.y_coord + 1};
+      printf("34\n");
       add(q, temp_neighbor);
+      printf("35\n");
       used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord, temp.target.y_coord + 1);
+      printf("36\n");
     }
 
     if (temp.target.x_coord - 1 > 0 && graph[temp.target.x_coord * SIZE + temp.target.y_coord * SIZE + 2] == FREE) {
+      printf("37\n");
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                   .start.y_coord = temp.target.y_coord,
                   .target.x_coord = temp.target.x_coord - 1,
                   .target.y_coord = temp.target.y_coord};
+      printf("38\n");
       add(q, temp_neighbor);
+      printf("39\n");
       used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord - 1, temp.target.y_coord);
+      printf("40\n");
     }
     if (temp.target.y_coord - 1 > 0 && graph[temp.target.x_coord * SIZE + temp.target.y_coord * SIZE + 3] == FREE) {
+      printf("41\n");
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                             .start.y_coord = temp.target.y_coord,
                             .target.x_coord = temp.target.x_coord,
                             .target.y_coord = temp.target.y_coord - 1};
+                            printf("1\n");
       add(q, temp_neighbor);
+      printf("42\n");
       used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord, temp.target.y_coord - 1);
+      printf("43\n");
     }
   }
 }
