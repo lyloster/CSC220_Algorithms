@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include "test.c"
 
+#define VISITED 2
+
 typedef struct Vertex {
   int x_coord;
   int y_coord;
@@ -59,6 +61,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
   //adding all the FREE outgoing edges from vertex S
   if (sx + 1 < SIZE && graph[sx * SIZE * 4 + sy * 4 + 0] == FREE) {
     //printf("3\n");
+    graph[sx * SIZE * 4 + sy * 4 + 0] = VISITED;
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx + 1, .target.y_coord = sy};
     //printf("4\n");
@@ -69,6 +72,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
   }
   if (sy + 1 < SIZE && graph[sx * SIZE * 4 + sy * 4 + 1] == FREE) {
     //printf("7\n");
+    graph[sx * SIZE * 4 + sy * 4 + 0] = VISITED;
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx, .target.y_coord = sy + 1};
     //printf("8\n");
@@ -79,6 +83,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
   }
   if (sx - 1 > 0 && graph[sx * SIZE  * 4 + sy * 4 + 2] == FREE) {
     //printf("11\n");
+        graph[sx * SIZE * 4 + sy * 4 + 0] = VISITED;
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                  .target.x_coord = sx - 1, .target.y_coord = sy};
     //printf("12\n");
@@ -89,6 +94,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
   }
   if (sy - 1 > 0 && graph[sx * SIZE * 4 + sy * 4 + 3] == FREE) {
     //printf("15\n");
+        graph[sx * SIZE * 4 + sy * 4 + 0] = VISITED;
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx, .target.y_coord = sy - 1};
     //printf("16\n");
