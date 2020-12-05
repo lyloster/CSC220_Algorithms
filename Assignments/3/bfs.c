@@ -53,6 +53,8 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
   Queue* q;
   printf("1\n");
   q = (Queue*) malloc(sizeof(Queue));
+  q->head = NULL;
+  q->tail = NULL;
   printf("2\n");
   //adding all the FREE outgoing edges from vertex S
   if (sx + 1 < SIZE && graph[sx * SIZE + sy * SIZE + 0] == FREE) {
