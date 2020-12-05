@@ -41,6 +41,15 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
   printf("(2,3) to (2,4): %d\n", graph[2 * SIZE * SIZE + 3 * SIZE + 0]);
   printf("(2,4) to (2,5): %d\n", graph[2 * SIZE * SIZE + 4 * SIZE + 0]);
   printf("");
+
+  for (int i = 0; i < SIZE; ++i) {
+    for (int j = 0; j < SIZE; ++j) {
+      printf("i == %d, j == %d, k == 0, [i][j][k] == %d", i, j, graph[i * SIZE * SIZE + j * SIZE]);
+      printf("i == %d, j == %d, k == 1, [i][j][k] == %d", i, j, graph[i * SIZE * SIZE + j * SIZE + 1]);
+      printf("i == %d, j == %d, k == 2, [i][j][k] == %d", i, j, graph[i * SIZE * SIZE + j * SIZE + 2]);
+      printf("i == %d, j == %d, k == 3, [i][j][k] == %d", i, j, graph[i * SIZE * SIZE + j * SIZE + 3]);
+    }
+  }
   // Queue* q;
   // q = (Queue*) malloc(sizeof(Queue));
   // //adding all the FREE outgoing edges from vertex S
