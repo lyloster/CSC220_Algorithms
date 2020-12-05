@@ -183,17 +183,29 @@ int isEmpty(Queue* list) {
 }
 
 void add(Queue* list, Edge e) { //insert a node in a queue
+  printf("in add: 1\n");
     if (list->head == NULL) {
+      printf("in add, if: 2\n");
       list->head = (Node*)malloc(sizeof(Node));
+      printf("in add, if: 3\n");
       list->head->edge = e;
+      printf("in add, if: 4\n");
       list->head->next = NULL;
+      printf("in add, if: 5\n");
       list->tail = list->head;
+      printf("in add, if: 6\n");
     } else {
+      printf("in add, else: 2\n");
       Node* temp = (Node*)malloc(sizeof(Node));
+      printf("in add, else: 3\n");
       temp->edge = e;
+      printf("in add, else: 4\n");
       temp->next = NULL;
+      printf("in add, else: 5\n");
       list->tail->next = temp;
+      printf("in add, else: 6\n");
       list->tail = temp;
+      printf("in add, else: 7\n");
     }
 }
 
