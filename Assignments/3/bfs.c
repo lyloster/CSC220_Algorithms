@@ -44,10 +44,10 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
 
   for (int i = 0; i < SIZE; ++i) {
     for (int j = 0; j < SIZE; ++j) {
-      printf("i == %d, j == %d, k == 0, graph[%d][%d][0] == %d\n", i, j, i, j, graph[i * SIZE * SIZE + j * SIZE]);
-      printf("i == %d, j == %d, k == 1, graph[%d][%d][1] == %d\n", i, j, i, j, graph[i * SIZE * SIZE + j * SIZE + 1]);
-      printf("i == %d, j == %d, k == 2, graph[%d][%d][2] == %d\n", i, j, i, j, graph[i * SIZE * SIZE + j * SIZE + 2]);
-      printf("i == %d, j == %d, k == 3, graph[%d][%d][3] == %d\n", i, j, i, j, graph[i * SIZE * SIZE + j * SIZE + 3]);
+      printf("i == %d, j == %d, k == 0, graph[%d][%d][0] == %d\n", i, j, i, j, graph[i * SIZE + j * SIZE]);
+      printf("i == %d, j == %d, k == 1, graph[%d][%d][1] == %d\n", i, j, i, j, graph[i * SIZE + j * SIZE + 1]);
+      printf("i == %d, j == %d, k == 2, graph[%d][%d][2] == %d\n", i, j, i, j, graph[i  * SIZE + j * SIZE + 2]);
+      printf("i == %d, j == %d, k == 3, graph[%d][%d][3] == %d\n", i, j, i, j, graph[i  * SIZE + j * SIZE + 3]);
     }
   }
   // Queue* q;
