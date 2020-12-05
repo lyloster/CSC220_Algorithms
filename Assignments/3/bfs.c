@@ -116,7 +116,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
 
     if (temp.target.x_coord == tx && temp.target.y_coord == ty) {
       //printf("26\n");
-      done(graph, path, capacity, sx, sy, tx, ty);
+      //done(graph, path, capacity, sx, sy, tx, ty);
       //printf("27\n");
       return; //return?
       //printf("28\n");
