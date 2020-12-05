@@ -98,7 +98,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     //printf("18\n");
   }
   //printf("19\n");
-  Edge path [SIZE * SIZE * SIZE * 4];
+  //Edge path [SIZE * SIZE * SIZE * 4];
   //printf("20\n");
   int capacity = 0;
   //printf("21\n");
@@ -106,9 +106,9 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     //printf("22\n");
     Edge temp = pop(q);
     //printf("23\n");
-    path[capacity] = temp;
+    //path[capacity] = temp;
     //printf("24\n");
-    ++capacity;
+    //++capacity;
     if (capacity >= SIZE * SIZE * SIZE * 4) {
       printf("Queue is too small\n");
     }
