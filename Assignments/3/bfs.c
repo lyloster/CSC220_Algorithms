@@ -128,7 +128,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       printf("30\n");
       add(q, temp_neighbor);
       printf("31\n");
-      used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord, temp.target.y_coord + 1);
+      used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord + 1, temp.target.y_coord);
       printf("32\n");
     }
 
