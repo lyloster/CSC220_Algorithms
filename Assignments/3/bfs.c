@@ -57,7 +57,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
   q->tail = NULL;
   //printf("2\n");
   //adding all the FREE outgoing edges from vertex S
-  if (sx + 1 < SIZE && graph[sx * SIZE + sy * SIZE + 0] == FREE) {
+  if (sx + 1 < SIZE && graph[sx * SIZE * 4 + sy * 4 + 0] == FREE) {
     //printf("3\n");
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx + 1, .target.y_coord = sy};
@@ -67,7 +67,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     used_edge(sx, sy, sx + 1, sy);
     //printf("6\n");
   }
-  if (sy + 1 < SIZE && graph[sx * SIZE + sy * SIZE + 1] == FREE) {
+  if (sy + 1 < SIZE && graph[sx * SIZE * 4 + sy * 4 + 1] == FREE) {
     //printf("7\n");
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx, .target.y_coord = sy + 1};
@@ -77,7 +77,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     used_edge(sx, sy, sx, sy + 1);
     //printf("10\n");
   }
-  if (sx - 1 > 0 && graph[sx * SIZE  + sy * SIZE + 2] == FREE) {
+  if (sx - 1 > 0 && graph[sx * SIZE  * 4 + sy * 4 + 2] == FREE) {
     //printf("11\n");
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                  .target.x_coord = sx - 1, .target.y_coord = sy};
@@ -87,7 +87,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     used_edge(sx, sy, sx - 1, sy);
     //printf("14\n");
   }
-  if (sy - 1 > 0 && graph[sx * SIZE + sy * SIZE + 3] == FREE) {
+  if (sy - 1 > 0 && graph[sx * SIZE * 4 + sy * 4 + 3] == FREE) {
     //printf("15\n");
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx, .target.y_coord = sy - 1};
@@ -98,7 +98,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     //printf("18\n");
   }
   //printf("19\n");
-  Edge path [SIZE * SIZE * SIZE * 4];
+  Edge path [SIZE * SIZE  * 4];
   //printf("20\n");
   int capacity = 0;
   //printf("21\n");
@@ -109,7 +109,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     path[capacity] = temp;
     //printf("24\n");
     ++capacity;
-    if (capacity >= SIZE * SIZE * SIZE * 4) {
+    if (capacity >= SIZE * SIZE * 4) {
       printf("Queue is too small\n");
     }
     //printf("25\n");
@@ -122,7 +122,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       //printf("28\n");
     }
 
-    if (temp.target.x_coord + 1 < SIZE && graph[temp.target.x_coord * SIZE + temp.target.y_coord * SIZE + 0] == FREE) {
+    if (temp.target.x_coord + 1 < SIZE && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 0] == FREE) {
       //printf("29\n");
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                             .start.y_coord = temp.target.y_coord,
@@ -135,7 +135,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       //printf("32\n");
     }
 
-    if (temp.target.y_coord + 1 < SIZE && graph[temp.target.x_coord * SIZE + temp.target.y_coord * SIZE + 1] == FREE) {
+    if (temp.target.y_coord + 1 < SIZE && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 1] == FREE) {
       //printf("33\n");
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                             .start.y_coord = temp.target.y_coord,
@@ -148,7 +148,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       //printf("36\n");
     }
 
-    if (temp.target.x_coord - 1 > 0 && graph[temp.target.x_coord * SIZE + temp.target.y_coord * SIZE + 2] == FREE) {
+    if (temp.target.x_coord - 1 > 0 && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 2] == FREE) {
       //printf("37\n");
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                   .start.y_coord = temp.target.y_coord,
@@ -161,7 +161,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       //printf("40\n");
     }
 
-    if (temp.target.y_coord - 1 > 0 && graph[temp.target.x_coord * SIZE + temp.target.y_coord * SIZE + 3] == FREE) {
+    if (temp.target.y_coord - 1 > 0 && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 3] == FREE) {
       //printf("41\n");
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                             .start.y_coord = temp.target.y_coord,
