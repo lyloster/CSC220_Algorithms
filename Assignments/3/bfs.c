@@ -209,6 +209,9 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     }
   }
   printf("No path between a and b :-( \n");
+  while(1){
+    path_edge(0,0,1,0);
+  }
 }
 
 void done(int* graph, Edge* path, int capacity, int sx, int sy, int tx, int ty) {
