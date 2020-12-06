@@ -137,6 +137,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       //printf("26\n");
       //done(graph, path, capacity, sx, sy, tx, ty);
       //printf("27\n");
+      printf("Goal reached!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
       return; //return?
       //printf("28\n");
     }
@@ -152,8 +153,8 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       add(q, temp_neighbor);
       //printf("31\n");
       used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord + 1, temp.target.y_coord);
-      // graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 0] = BLOCKED;
-      // graph[(temp.target.x_coord + 1) * SIZE * 4 + temp.target.y_coord * 4 + 2] = BLOCKED;
+      graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 0] = BLOCKED;
+      graph[(temp.target.x_coord + 1) * SIZE * 4 + temp.target.y_coord * 4 + 2] = BLOCKED;
       //printf("32\n");
     }
 
@@ -205,6 +206,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       //printf("43\n");
     }
   }
+  printf("No path between a and b :-( \n");
 }
 
 void done(int* graph, Edge* path, int capacity, int sx, int sy, int tx, int ty) {
