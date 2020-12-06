@@ -177,6 +177,7 @@ void done(Edge* path, int capacity, int sx, int sy, int tx, int ty) {
       }
     }
   }
+  printf("after while: sx == %d, sy == %d, targetX == %d, targety = %d\n", sx, sy, targetX, targetY);
   // while(1) {
   //   path_edge(sx, sy, sx + 1, sy);
   // }
