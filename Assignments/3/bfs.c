@@ -31,11 +31,17 @@ void printQueue(Queue* list);
 void add(Queue* list, Edge e);
 Edge pop(Queue* list);
 int isEmpty(Queue* list);
-void find_path(int* graph, int sx, int sy, int tx, int ty);
+void find_path(int* g, int sx, int sy, int tx, int ty);
 void done(Edge* path, int capacity, int sx, int sy, int tx, int ty);
 
-void find_path(int* graph, int sx, int sy, int tx, int ty) {
+void find_path(int* g, int sx, int sy, int tx, int ty) {
   //creates a queue
+  int graphSize = SIZE * SIZE * 4;
+  int graph [graphSize];
+  for (int i = 0; i < graphSize; ++i) {
+    graph[i] = g[i];
+  }
+  
   Queue* q;
   q = (Queue*) malloc(sizeof(Queue));
   q->head = NULL;
