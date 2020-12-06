@@ -166,7 +166,7 @@ void done(Edge* path, int capacity, int sx, int sy, int tx, int ty) {
   printf("in done\n");
   int targetX = tx;
   int targetY = ty;
-  while (sx != targetX && sy != targetY) {
+  while (!(sx == targetX && sy == targetY)) {
     printf("sx == %d, sy == %d, targetX == %d, targety = %d\n", sx, sy, targetX, targetY);
     for (int i = capacity - 1; i >= 0; --i) {
       if (path[i].target.x_coord == targetX && path[i].target.y_coord == targetY) {
