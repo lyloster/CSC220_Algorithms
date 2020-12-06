@@ -1,13 +1,11 @@
 //CSC220
 //Assignement 3 - Graph Exploration
 //Kristina Ilyovska
-//11/20/20
+//05/12/20
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "test.c"
-
-#define VISITED 2
 
 typedef struct Vertex {
   int x_coord;
@@ -36,19 +34,15 @@ int isEmpty(Queue* list);
 void find_path(int* graph, int sx, int sy, int tx, int ty);
 void done(Edge* path, int capacity, int sx, int sy, int tx, int ty);
 
-//should be moved in test?
 void find_path(int* graph, int sx, int sy, int tx, int ty) {
-
-//  path_edge(7, 29, 7, 30);
+  //creates a queue
   Queue* q;
   q = (Queue*) malloc(sizeof(Queue));
   q->head = NULL;
   q->tail = NULL;
-  int elements = 0;
 
   //adding all the FREE outgoing edges from vertex S
   if (sx + 1 < SIZE && graph[sx * SIZE * 4 + sy * 4 + 0] == FREE) {
-    ++elements;
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx + 1, .target.y_coord = sy};
     add(q, temp);
@@ -57,7 +51,6 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     graph[(sx + 1) * SIZE * 4 + sy * 4 + 2] = BLOCKED;
   }
   if (sy + 1 < SIZE && graph[sx * SIZE * 4 + sy * 4 + 1] == FREE) {
-    ++elements;
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx, .target.y_coord = sy + 1};
     add(q, temp);
@@ -66,7 +59,6 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     graph[sx * SIZE * 4 + (sy + 1) * 4 + 3] = BLOCKED;
   }
   if (sx - 1 >= 0 && graph[sx * SIZE  * 4 + sy * 4 + 2] == FREE) {
-    ++elements;
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                  .target.x_coord = sx - 1, .target.y_coord = sy};
     add(q, temp);
@@ -75,7 +67,6 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     graph[(sx - 1) * SIZE * 4 + sy * 4 + 0] = BLOCKED;
   }
   if (sy - 1 >= 0 && graph[sx * SIZE * 4 + sy * 4 + 3] == FREE) {
-    ++elements;
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx, .target.y_coord = sy - 1};
     add(q, temp);
@@ -84,32 +75,33 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     graph[sx * SIZE * 4 + (sy - 1) * 4 + 1] = BLOCKED;
   }
 
+  //creates an array of edges to recreate the shortest path if it exists
   Edge path [SIZE * SIZE  * 4];
   int capacity = 0;
 
   while (!isEmpty(q)) {
 
     Edge temp = pop(q);
-    --elements;
     path[capacity] = temp;
     ++capacity;
-    if (capacity >= SIZE * SIZE * 4) {
-      printf("Queue is too small\n");
-    }
+    // if (capacity >= SIZE * SIZE * 4) {
+    //   printf("Queue is too small\n");
+    // }
+
 
     if (temp.target.x_coord == tx && temp.target.y_coord == ty) {
-      printf("before done\n");
       done(path, capacity, sx, sy, tx, ty);
-      //printf("start x == %d, start y == %d, tx == %d, ty == %d\n", temp.start.x_coord, temp.start.y_coord, tx, ty);
       printf("Goal reached!\n");
-      // while(1){
-      //   path_edge(temp.start.x_coord, temp.start.y_coord, tx, ty);
-      // }
+      //infinite while loop is the only way for the visulization to buffer and work that I found (on Arch Linux VM)
+      while(1){
+        path_edge(temp.start.x_coord, temp.start.y_coord, tx, ty);
+      }
       return;
     }
 
+    //add free edges from temp and mark them as BLOCKED, so that they are not visited again
+    //block them from both directions
     if (temp.target.x_coord + 1 < SIZE && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 0] == FREE) {
-      ++elements;
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                             .start.y_coord = temp.target.y_coord,
                             .target.x_coord = temp.target.x_coord + 1,
@@ -121,7 +113,6 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     }
 
     if (temp.target.y_coord + 1 < SIZE && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 1] == FREE) {
-      ++elements;
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                             .start.y_coord = temp.target.y_coord,
                             .target.x_coord = temp.target.x_coord,
@@ -133,7 +124,6 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     }
 
     if (temp.target.x_coord - 1 >= 0 && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 2] == FREE) {
-      ++elements;
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                   .start.y_coord = temp.target.y_coord,
                   .target.x_coord = temp.target.x_coord - 1,
@@ -145,7 +135,6 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     }
 
     if (temp.target.y_coord - 1 >= 0 && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 3] == FREE) {
-      ++elements;
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                             .start.y_coord = temp.target.y_coord,
                             .target.x_coord = temp.target.x_coord,
@@ -157,17 +146,18 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     }
   }
   printf("No path between a and b :-( \n");
-  // while(1){
-  //   path_edge(0,0,1,0);
-  // }
+  //infinite while loop is the only way for the visulization to buffer and work that I found (on Arch Linux VM)
+  while(1){
+    path_edge(0,0,1,0); //hardcoded path to buffer used_edge green path
+  }
 }
 
+//recreates the shortest path and colors it in orange
 void done(Edge* path, int capacity, int sx, int sy, int tx, int ty) {
-  printf("in done\n");
   int targetX = tx;
   int targetY = ty;
   while (!(sx == targetX && sy == targetY)) {
-    printf("sx == %d, sy == %d, targetX == %d, targety = %d\n", sx, sy, targetX, targetY);
+    // printf("sx == %d, sy == %d, targetX == %d, targety = %d\n", sx, sy, targetX, targetY);
     for (int i = capacity - 1; i >= 0; --i) {
       if (path[i].target.x_coord == targetX && path[i].target.y_coord == targetY) {
         path_edge(path[i].start.x_coord, path[i].start.y_coord, targetX, targetY);
@@ -177,9 +167,9 @@ void done(Edge* path, int capacity, int sx, int sy, int tx, int ty) {
       }
     }
   }
-//  printf("after while: sx == %d, sy == %d, targetX == %d, targety = %d\n", sx, sy, targetX, targetY);
 }
 
+//QUEUE utility methods
 int isEmpty(Queue* list) {
   if (list->head == NULL) {
     return 1;
@@ -218,22 +208,9 @@ void printQueue(Queue* list) {
 }
 
 Edge pop(Queue* list) {
-  // if (list == NULL) {
-  //   printf("NULL POINTER");
-  //   return -1;
-  // } else if (list->head == NULL) {
-  //   printf("EMPTY QUEUE");
-  //   return -1;
-  // }else {
-    //Edge* e = (Edge*)(malloc(sizeof(Edge))); //where to dealocate
     Edge e = list->head->edge;
-    // e->start.x_coord = list->head->edge.start.x_coord;
-    // e->start.y_coord = list->head->edge.start.y_coord;
-    // e->target.x_coord = list->head->edge.target.x_coord;
-    // e->target.y_coord = list->head->edge.target.y_coord;
     Node* temp = list->head;
     list->head = list->head->next;
     free(temp);
     return e;
-  //}
 }
