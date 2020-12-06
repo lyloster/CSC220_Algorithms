@@ -134,7 +134,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       //done(graph, path, capacity, sx, sy, tx, ty);
       //printf("27\n");
       printf("start x == %d, start y == %d, tx == %d, ty == %d\n", temp.start.x_coord, temp.start.y_coord, tx, ty);
-      path_edge(temp.start.x_coord, temp.start.y_coord, tx, ty);
+      path_edge(temp.start.x_coord, temp.start.y_coord, ty, tx);
       printf("Goal reached!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
       while(1);
       printf("Goal reached after while!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
