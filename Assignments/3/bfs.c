@@ -175,9 +175,9 @@ void done(Edge* path, int capacity, int sx, int sy, int tx, int ty) {
       }
     }
   }
-  while(1) {
-    path_edge(sx, sy, sx + 1, sy);
-  }
+  // while(1) {
+  //   path_edge(sx, sy, sx + 1, sy);
+  // }
 }
 
 int isEmpty(Queue* list) {
