@@ -152,8 +152,8 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       add(q, temp_neighbor);
       //printf("31\n");
       used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord + 1, temp.target.y_coord);
-      graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 0] = BLOCKED;
-      graph[(temp.target.x_coord + 1) * SIZE * 4 + temp.target.y_coord * 4 + 2] = BLOCKED;
+      // graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 0] = BLOCKED;
+      // graph[(temp.target.x_coord + 1) * SIZE * 4 + temp.target.y_coord * 4 + 2] = BLOCKED;
       //printf("32\n");
     }
 
@@ -168,9 +168,9 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       add(q, temp_neighbor);
       //printf("35\n");
       used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord, temp.target.y_coord + 1);
-      graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 1] = BLOCKED;
-      graph[temp.target.x_coord * SIZE * 4 + (temp.target.y_coord + 1) * 4 + 3] = BLOCKED;
-      //printf("36\n");
+      // graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 1] = BLOCKED;
+      // graph[temp.target.x_coord * SIZE * 4 + (temp.target.y_coord + 1) * 4 + 3] = BLOCKED;
+      // //printf("36\n");
     }
 
     if (temp.target.x_coord - 1 >= 0 && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 2] == FREE) {
@@ -184,8 +184,8 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       add(q, temp_neighbor);
       //printf("39\n");
       used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord - 1, temp.target.y_coord);
-      graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 2] = BLOCKED;
-      graph[(temp.target.x_coord - 1) * SIZE * 4 + temp.target.y_coord * 4 + 0] = BLOCKED;
+      // graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 2] = BLOCKED;
+      // graph[(temp.target.x_coord - 1) * SIZE * 4 + temp.target.y_coord * 4 + 0] = BLOCKED;
       //printf("40\n");
     }
 
@@ -200,8 +200,8 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       add(q, temp_neighbor);
       //printf("42\n");
       used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord, temp.target.y_coord - 1);
-      graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 3] = BLOCKED;
-      graph[temp.target.x_coord * SIZE * 4 + (temp.target.y_coord - 1) * 4 + 1] = BLOCKED;
+      // graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 3] = BLOCKED;
+      // graph[temp.target.x_coord * SIZE * 4 + (temp.target.y_coord - 1) * 4 + 1] = BLOCKED;
       //printf("43\n");
     }
   }
