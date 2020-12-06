@@ -63,7 +63,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
   if (sx + 1 < SIZE && graph[sx * SIZE * 4 + sy * 4 + 0] == FREE) {
     //printf("3\n");
     ++elements;
-    graph[sx * SIZE * 4 + sy * 4 + 0] = VISITED;
+    graph[sx * SIZE * 4 + sy * 4 + 0] = BLOCKED;
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx + 1, .target.y_coord = sy};
     //printf("4\n");
@@ -75,7 +75,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
   if (sy + 1 < SIZE && graph[sx * SIZE * 4 + sy * 4 + 1] == FREE) {
     //printf("7\n");
     ++elements;
-    graph[sx * SIZE * 4 + sy * 4 + 0] = VISITED;
+    graph[sx * SIZE * 4 + sy * 4 + 0] = BLOCKED;
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx, .target.y_coord = sy + 1};
     //printf("8\n");
@@ -87,7 +87,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
   if (sx - 1 >= 0 && graph[sx * SIZE  * 4 + sy * 4 + 2] == FREE) {
     //printf("11\n");
     ++elements;
-        graph[sx * SIZE * 4 + sy * 4 + 0] = VISITED;
+        graph[sx * SIZE * 4 + sy * 4 + 0] = BLOCKED;
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                  .target.x_coord = sx - 1, .target.y_coord = sy};
     //printf("12\n");
@@ -99,7 +99,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
   if (sy - 1 >= 0 && graph[sx * SIZE * 4 + sy * 4 + 3] == FREE) {
     //printf("15\n");
     ++elements;
-    graph[sx * SIZE * 4 + sy * 4 + 0] = VISITED;
+    graph[sx * SIZE * 4 + sy * 4 + 0] = BLOCKED;
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx, .target.y_coord = sy - 1};
     //printf("16\n");
@@ -140,7 +140,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     if (temp.target.x_coord + 1 < SIZE && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 0] == FREE) {
       ++elements;
       //printf("29\n");
-          graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 0] = VISITED;
+          graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 0] = BLOCKED;
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                             .start.y_coord = temp.target.y_coord,
                             .target.x_coord = temp.target.x_coord + 1,
@@ -155,7 +155,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     if (temp.target.y_coord + 1 < SIZE && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 1] == FREE) {
       ++elements;
       //printf("33\n");
-          graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 1] = VISITED;
+          graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 1] = BLOCKED;
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                             .start.y_coord = temp.target.y_coord,
                             .target.x_coord = temp.target.x_coord,
@@ -170,7 +170,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     if (temp.target.x_coord - 1 >= 0 && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 2] == FREE) {
       ++elements;
       //printf("37\n");
-          graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 2] = VISITED;
+          graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 2] = BLOCKED;
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                   .start.y_coord = temp.target.y_coord,
                   .target.x_coord = temp.target.x_coord - 1,
@@ -185,7 +185,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     if (temp.target.y_coord - 1 >= 0 && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 3] == FREE) {
       ++elements;
       //printf("41\n");
-          graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 3] = VISITED;
+          graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 3] = BLOCKED;
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                             .start.y_coord = temp.target.y_coord,
                             .target.x_coord = temp.target.x_coord,
