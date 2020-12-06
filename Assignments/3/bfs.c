@@ -35,13 +35,14 @@ void find_path(int* g, int sx, int sy, int tx, int ty);
 void done(Edge* path, int capacity, int sx, int sy, int tx, int ty);
 
 void find_path(int* g, int sx, int sy, int tx, int ty) {
-  //creates a queue
+  //makes a copy of the graph, so it can be modified without affecting visualization
   int graphSize = SIZE * SIZE * 4;
   int graph [graphSize];
   for (int i = 0; i < graphSize; ++i) {
     graph[i] = g[i];
   }
 
+  //creates a queue
   Queue* q;
   q = (Queue*) malloc(sizeof(Queue));
   q->head = NULL;
@@ -56,6 +57,7 @@ void find_path(int* g, int sx, int sy, int tx, int ty) {
     graph[sx * SIZE * 4 + sy * 4 + 0] = BLOCKED;
     graph[(sx + 1) * SIZE * 4 + sy * 4 + 2] = BLOCKED;
   }
+
   if (sy + 1 < SIZE && graph[sx * SIZE * 4 + sy * 4 + 1] == FREE) {
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx, .target.y_coord = sy + 1};
@@ -64,6 +66,7 @@ void find_path(int* g, int sx, int sy, int tx, int ty) {
     graph[sx * SIZE * 4 + sy * 4 + 1] = BLOCKED;
     graph[sx * SIZE * 4 + (sy + 1) * 4 + 3] = BLOCKED;
   }
+
   if (sx - 1 >= 0 && graph[sx * SIZE  * 4 + sy * 4 + 2] == FREE) {
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                  .target.x_coord = sx - 1, .target.y_coord = sy};
@@ -72,6 +75,7 @@ void find_path(int* g, int sx, int sy, int tx, int ty) {
     graph[sx * SIZE * 4 + sy * 4 + 2] = BLOCKED;
     graph[(sx - 1) * SIZE * 4 + sy * 4 + 0] = BLOCKED;
   }
+
   if (sy - 1 >= 0 && graph[sx * SIZE * 4 + sy * 4 + 3] == FREE) {
     Edge temp = {.start.x_coord = sx, .start.y_coord = sy,
                   .target.x_coord = sx, .target.y_coord = sy - 1};
@@ -90,18 +94,10 @@ void find_path(int* g, int sx, int sy, int tx, int ty) {
     Edge temp = pop(q);
     path[capacity] = temp;
     ++capacity;
-    // if (capacity >= SIZE * SIZE * 4) {
-    //   printf("Queue is too small\n");
-    // }
-
 
     if (temp.target.x_coord == tx && temp.target.y_coord == ty) {
       done(path, capacity, sx, sy, tx, ty);
       printf("Goal reached!\n");
-      //infinite while loop is the only way for the visulization to buffer and work that I found (on Arch Linux VM)
-      // while(1){
-      //   path_edge(temp.start.x_coord, temp.start.y_coord, tx, ty);
-      // }
       return;
     }
 
@@ -152,10 +148,11 @@ void find_path(int* g, int sx, int sy, int tx, int ty) {
     }
   }
   printf("No path between a and b :-( \n");
-  //infinite while loop is the only way for the visulization to buffer and work that I found (on Arch Linux VM)
-  // while(1){
-  //   path_edge(0,0,1,0); //hardcoded path to buffer used_edge green path
-  // }
+  
+  while (!isEmpty(q)) {
+    pop(q);
+  }
+  free(q);
 }
 
 //recreates the shortest path and colors it in orange
