@@ -34,7 +34,7 @@ void add(Queue* list, Edge e);
 Edge pop(Queue* list);
 int isEmpty(Queue* list);
 void find_path(int* graph, int sx, int sy, int tx, int ty);
-void done(int* graph, Edge* path, int capacity, int sx, int sy, int tx, int ty);
+void done(Edge* path, int capacity, int sx, int sy, int tx, int ty);
 
 //should be moved in test?
 void find_path(int* graph, int sx, int sy, int tx, int ty) {
@@ -86,22 +86,21 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
 
   Edge path [SIZE * SIZE  * 4];
   int capacity = 0;
+
   while (!isEmpty(q)) {
+
     Edge temp = pop(q);
     --elements;
     path[capacity] = temp;
     ++capacity;
-    if (capacity % 500 == 0) {
-      printf("iteration == %d, elements in queue == %d\n", capacity, elements);
-    }
-    if (capacity >= SIZE * SIZE * SIZE * 4) {
+    if (capacity >= SIZE * SIZE * 4) {
       printf("Queue is too small\n");
     }
 
     if (temp.target.x_coord == tx && temp.target.y_coord == ty) {
       done(graph, path, capacity, sx, sy, tx, ty);
       //printf("start x == %d, start y == %d, tx == %d, ty == %d\n", temp.start.x_coord, temp.start.y_coord, tx, ty);
-      printf("Goal reached!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+      printf("Goal reached!\n");
       while(1){
         path_edge(temp.start.x_coord, temp.start.y_coord, tx, ty);
       }
@@ -162,7 +161,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
   }
 }
 
-void done(int* graph, Edge* path, int capacity, int sx, int sy, int tx, int ty) {
+void done(Edge* path, int capacity, int sx, int sy, int tx, int ty) {
   int targetX = tx;
   int targetY = ty;
   while (sx != targetX && sy != targetY) {
