@@ -102,9 +102,9 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       done(path, capacity, sx, sy, tx, ty);
       //printf("start x == %d, start y == %d, tx == %d, ty == %d\n", temp.start.x_coord, temp.start.y_coord, tx, ty);
       printf("Goal reached!\n");
-      while(1){
-        path_edge(temp.start.x_coord, temp.start.y_coord, tx, ty);
-      }
+      // while(1){
+      //   path_edge(temp.start.x_coord, temp.start.y_coord, tx, ty);
+      // }
       return;
     }
 
@@ -157,9 +157,9 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     }
   }
   printf("No path between a and b :-( \n");
-  while(1){
-    path_edge(0,0,1,0);
-  }
+  // while(1){
+  //   path_edge(0,0,1,0);
+  // }
 }
 
 void done(Edge* path, int capacity, int sx, int sy, int tx, int ty) {
@@ -177,10 +177,7 @@ void done(Edge* path, int capacity, int sx, int sy, int tx, int ty) {
       }
     }
   }
-  printf("after while: sx == %d, sy == %d, targetX == %d, targety = %d\n", sx, sy, targetX, targetY);
-  // while(1) {
-  //   path_edge(sx, sy, sx + 1, sy);
-  // }
+//  printf("after while: sx == %d, sy == %d, targetX == %d, targety = %d\n", sx, sy, targetX, targetY);
 }
 
 int isEmpty(Queue* list) {
