@@ -133,6 +133,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       //printf("26\n");
       //done(graph, path, capacity, sx, sy, tx, ty);
       //printf("27\n");
+      printf("tx == %d, ty == %d\n", tx, ty);
       printf("Goal reached!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
       while(1);
       return; //return?
