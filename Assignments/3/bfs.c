@@ -38,11 +38,7 @@ void done(int* graph, Edge* path, int capacity, int sx, int sy, int tx, int ty);
 
 //should be moved in test?
 void find_path(int* graph, int sx, int sy, int tx, int ty) {
-  // printf("(1,1) to (1,2): %d\n", graph[1 * SIZE * SIZE + 1 * SIZE + 0]);
-  // printf("(2,2) to (2,3): %d\n", graph[2 * SIZE * SIZE + 2 * SIZE + 0]);
-  // printf("(2,3) to (2,4): %d\n", graph[2 * SIZE * SIZE + 3 * SIZE + 0]);
-  // printf("(2,4) to (2,5): %d\n", graph[2 * SIZE * SIZE + 4 * SIZE + 0]);
-  // printf("");
+
 
   // for (int i = 0; i < SIZE; ++i) {
   //   for (int j = 0; j < SIZE; ++j) {
@@ -169,8 +165,8 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       add(q, temp_neighbor);
       //printf("35\n");
       used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord, temp.target.y_coord + 1);
-      // graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 1] = BLOCKED;
-      // graph[temp.target.x_coord * SIZE * 4 + (temp.target.y_coord + 1) * 4 + 3] = BLOCKED;
+      graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 1] = BLOCKED;
+      graph[temp.target.x_coord * SIZE * 4 + (temp.target.y_coord + 1) * 4 + 3] = BLOCKED;
       // //printf("36\n");
     }
 
@@ -185,8 +181,8 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       add(q, temp_neighbor);
       //printf("39\n");
       used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord - 1, temp.target.y_coord);
-      // graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 2] = BLOCKED;
-      // graph[(temp.target.x_coord - 1) * SIZE * 4 + temp.target.y_coord * 4 + 0] = BLOCKED;
+      graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 2] = BLOCKED;
+      graph[(temp.target.x_coord - 1) * SIZE * 4 + temp.target.y_coord * 4 + 0] = BLOCKED;
       //printf("40\n");
     }
 
@@ -201,8 +197,8 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       add(q, temp_neighbor);
       //printf("42\n");
       used_edge(temp.target.x_coord, temp.target.y_coord, temp.target.x_coord, temp.target.y_coord - 1);
-      // graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 3] = BLOCKED;
-      // graph[temp.target.x_coord * SIZE * 4 + (temp.target.y_coord - 1) * 4 + 1] = BLOCKED;
+      graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 3] = BLOCKED;
+      graph[temp.target.x_coord * SIZE * 4 + (temp.target.y_coord - 1) * 4 + 1] = BLOCKED;
       //printf("43\n");
     }
   }
