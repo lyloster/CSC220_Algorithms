@@ -39,7 +39,7 @@ void done(int* graph, Edge* path, int capacity, int sx, int sy, int tx, int ty);
 //should be moved in test?
 void find_path(int* graph, int sx, int sy, int tx, int ty) {
 
-
+  path_edge(7, 29, 7, 30);
   // for (int i = 0; i < SIZE; ++i) {
   //   for (int j = 0; j < SIZE; ++j) {
   //     printf("i == %d, j == %d, k == 0, graph[%d][%d][0] == %d\n", i, j, i, j, graph[i * SIZE * 4 + j * 4]);
@@ -129,12 +129,12 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     // }
     //printf("25\n");
 
-    if (temp.target.x_coord == ty && temp.target.y_coord == tx) {
+    if (temp.target.x_coord == tx && temp.target.y_coord == ty) {
       //printf("26\n");
       //done(graph, path, capacity, sx, sy, tx, ty);
       //printf("27\n");
       printf("start x == %d, start y == %d, tx == %d, ty == %d\n", temp.start.x_coord, temp.start.y_coord, tx, ty);
-      path_edge(temp.start.x_coord, temp.start.y_coord, ty, tx);
+      path_edge(temp.start.x_coord, temp.start.y_coord, tx, ty);
       printf("Goal reached!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
       while(1);
       printf("Goal reached after while!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
