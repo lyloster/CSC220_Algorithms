@@ -114,7 +114,10 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     //printf("23\n");
     //path[capacity] = temp;
     //printf("24\n");
-    //++capacity;
+    ++capacity;
+    if (capacity % 500 == 0) {
+      printf("iteration == %d\n", capacity);
+    }
     if (capacity >= SIZE * SIZE * SIZE * 4) {
       printf("Queue is too small\n");
     }
