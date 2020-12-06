@@ -154,7 +154,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       //printf("36\n");
     }
 
-    if (temp.target.x_coord - 1 > 0 && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 2] == FREE) {
+    if (temp.target.x_coord - 1 >= 0 && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 2] == FREE) {
       //printf("37\n");
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                   .start.y_coord = temp.target.y_coord,
@@ -167,7 +167,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       //printf("40\n");
     }
 
-    if (temp.target.y_coord - 1 > 0 && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 3] == FREE) {
+    if (temp.target.y_coord - 1 >= 0 && graph[temp.target.x_coord * SIZE * 4 + temp.target.y_coord * 4 + 3] == FREE) {
       //printf("41\n");
       Edge temp_neighbor = {.start.x_coord = temp.target.x_coord,
                             .start.y_coord = temp.target.y_coord,
