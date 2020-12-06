@@ -98,7 +98,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     }
 
     if (temp.target.x_coord == tx && temp.target.y_coord == ty) {
-      done(graph, path, capacity, sx, sy, tx, ty);
+      done(path, capacity, sx, sy, tx, ty);
       //printf("start x == %d, start y == %d, tx == %d, ty == %d\n", temp.start.x_coord, temp.start.y_coord, tx, ty);
       printf("Goal reached!\n");
       while(1){
