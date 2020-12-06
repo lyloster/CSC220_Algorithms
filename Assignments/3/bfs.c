@@ -136,7 +136,9 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       printf("start x == %d, start y == %d, tx == %d, ty == %d\n", temp.start.x_coord, temp.start.y_coord, tx, ty);
       path_edge(temp.start.x_coord, temp.start.y_coord, tx, ty);
       printf("Goal reached!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
-      while(1);
+      while(1){
+        path_edge(7, 29, 7, 30);
+      }
       printf("Goal reached after while!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
       return; //return?
       //printf("28\n");
