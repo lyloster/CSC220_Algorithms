@@ -98,6 +98,11 @@ void find_path(int* g, int sx, int sy, int tx, int ty) {
     if (temp.target.x_coord == tx && temp.target.y_coord == ty) {
       done(path, capacity, sx, sy, tx, ty);
       printf("Goal reached!\n");
+      //free rest of queue
+      while (!isEmpty(q)) {
+        pop(q);
+      }
+      free(q);
       return;
     }
 
@@ -148,11 +153,6 @@ void find_path(int* g, int sx, int sy, int tx, int ty) {
     }
   }
   printf("No path between a and b :-( \n");
-  
-  while (!isEmpty(q)) {
-    pop(q);
-  }
-  free(q);
 }
 
 //recreates the shortest path and colors it in orange
