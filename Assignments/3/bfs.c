@@ -177,7 +177,7 @@ void done(int* graph, Edge* path, int capacity, int sx, int sy, int tx, int ty) 
     }
   }
   while(1) {
-    path_edge(sx, sy, targetX, targetY);
+    path_edge(sx, sy, sx + 1, sy);
   }
 }
 
