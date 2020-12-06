@@ -118,9 +118,9 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     if (capacity % 500 == 0) {
       printf("iteration == %d\n", capacity);
     }
-    if (capacity >= SIZE * SIZE * SIZE * 4) {
-      printf("Queue is too small\n");
-    }
+    // if (capacity >= SIZE * SIZE * SIZE * 4) {
+    //   printf("Queue is too small\n");
+    // }
     //printf("25\n");
 
     if (temp.target.x_coord == tx && temp.target.y_coord == ty) {
