@@ -95,7 +95,6 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
       //infinite while loop is the only way for the visulization to buffer and work that I found (on Arch Linux VM)
       while(1){
         path_edge(temp.start.x_coord, temp.start.y_coord, tx, ty);
-        exit(0);
       }
       return;
     }
@@ -151,6 +150,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
   while(1){
     path_edge(0,0,1,0); //hardcoded path to buffer used_edge green path
   }
+  exit(0);
 }
 
 //recreates the shortest path and colors it in orange
