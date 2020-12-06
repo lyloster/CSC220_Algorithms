@@ -168,10 +168,10 @@ void done(int* graph, Edge* path, int capacity, int sx, int sy, int tx, int ty) 
   int targetY = ty;
   while (sx != tx && sy != ty) {
     for (int i = 0; i < capacity; ++i) {
-      if (path[i]->target.x_coord == targetX && path[i]->target.y_coord == targetY) {
-        path_edge(path[i]->start.x_coord, path[i]->start.y_coord, path[i]->target.x_coord, path[i]->target.y_coord);
-        targetX = path[i]->start.x_coord;
-        targetY = path[i]->start.y_coord;
+      if (path[i].target.x_coord == targetX && path[i].target.y_coord == targetY) {
+        path_edge(path[i].start.x_coord, path[i].start.y_coord, path[i].target.x_coord, path[i].target.y_coord);
+        targetX = path[i].start.x_coord;
+        targetY = path[i].start.y_coord;
         break;
       }
     }
