@@ -166,7 +166,8 @@ void done(int* graph, Edge* path, int capacity, int sx, int sy, int tx, int ty) 
   int targetX = tx;
   int targetY = ty;
   while (sx != targetX && sy != targetY) {
-    for (int i = 0; i < capacity; ++i) {
+    for (int i = capacity - 1; i >= 0; --i) {
+      printf("%d/%d\n", i, capacity);
       if (path[i].target.x_coord == targetX && path[i].target.y_coord == targetY) {
         path_edge(path[i].start.x_coord, path[i].start.y_coord, path[i].target.x_coord, path[i].target.y_coord);
         targetX = path[i].start.x_coord;
