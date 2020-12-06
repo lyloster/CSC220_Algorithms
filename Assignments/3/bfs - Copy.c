@@ -41,7 +41,7 @@ void find_path(int* g, int sx, int sy, int tx, int ty) {
   for (int i = 0; i < graphSize; ++i) {
     graph[i] = g[i];
   }
-
+  
   Queue* q;
   q = (Queue*) malloc(sizeof(Queue));
   q->head = NULL;
@@ -99,9 +99,9 @@ void find_path(int* g, int sx, int sy, int tx, int ty) {
       done(path, capacity, sx, sy, tx, ty);
       printf("Goal reached!\n");
       //infinite while loop is the only way for the visulization to buffer and work that I found (on Arch Linux VM)
-      // while(1){
-      //   path_edge(temp.start.x_coord, temp.start.y_coord, tx, ty);
-      // }
+      while(1){
+        path_edge(temp.start.x_coord, temp.start.y_coord, tx, ty);
+      }
       return;
     }
 
@@ -153,9 +153,9 @@ void find_path(int* g, int sx, int sy, int tx, int ty) {
   }
   printf("No path between a and b :-( \n");
   //infinite while loop is the only way for the visulization to buffer and work that I found (on Arch Linux VM)
-  // while(1){
-  //   path_edge(0,0,1,0); //hardcoded path to buffer used_edge green path
-  // }
+  while(1){
+    path_edge(0,0,1,0); //hardcoded path to buffer used_edge green path
+  }
 }
 
 //recreates the shortest path and colors it in orange
