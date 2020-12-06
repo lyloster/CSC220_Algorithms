@@ -98,6 +98,7 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
     }
 
     if (temp.target.x_coord == tx && temp.target.y_coord == ty) {
+      printf("before done\n");
       done(path, capacity, sx, sy, tx, ty);
       //printf("start x == %d, start y == %d, tx == %d, ty == %d\n", temp.start.x_coord, temp.start.y_coord, tx, ty);
       printf("Goal reached!\n");
@@ -162,12 +163,13 @@ void find_path(int* graph, int sx, int sy, int tx, int ty) {
 }
 
 void done(Edge* path, int capacity, int sx, int sy, int tx, int ty) {
+  printf("in done\n");
   int targetX = tx;
   int targetY = ty;
   while (sx != targetX && sy != targetY) {
+    printf("sx == %d, sy == %d, targetX == %d, targety = %d\n", sx, sy, targetX, targetY);
     for (int i = capacity - 1; i >= 0; --i) {
       if (path[i].target.x_coord == targetX && path[i].target.y_coord == targetY) {
-        printf("%d/%d\n", i, capacity);
         path_edge(path[i].start.x_coord, path[i].start.y_coord, targetX, targetY);
         targetX = path[i].start.x_coord;
         targetY = path[i].start.y_coord;
