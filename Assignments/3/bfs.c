@@ -153,6 +153,7 @@ void find_path(int* g, int sx, int sy, int tx, int ty) {
     }
   }
   printf("No path between a and b :-( \n");
+  free(q);
 }
 
 //recreates the shortest path and colors it in orange
